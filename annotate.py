@@ -25,7 +25,8 @@ for count,i,j,lab in zip(range(df_filtered.shape[0]),df_filtered["sentence"],df_
     if count < last: continue
     
     for l in j:
-        print("***************************************************************************** \n")
+        print("********************************KEEP CALM AND ANNOTATE******************************** \n")
+        print("*************************************",count,"/",df_filtered.shape[0],"************************************* \n")
         print(i,"\n")
         print("Is '",l,"' a subject (1) or a polarized word (2)")
         label=input()
@@ -43,6 +44,7 @@ for count,i,j,lab in zip(range(df_filtered.shape[0]),df_filtered["sentence"],df_
         else:
             labels_subject.append(0)
             labels_polarized.append(0)
+        clear_console()
         
     #check if first element by trying to import, if import fails means first element
     if breaker==True: continue
