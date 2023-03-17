@@ -16,9 +16,12 @@ for count,i,j,lab in zip(range(df_filtered.shape[0]),df_filtered["sentence"],df_
     breaker=False
     try:
         df_out=pd.read_csv("dataset_out.csv")
+        last=df_filtered.loc[df_filtered['sentence']==df_out['sentence'].iloc[-1]].index[0]+1
     except:
         df_out=pd.DataFrame(columns=['sentence', 'label', 'subject_mask','polarized_mask'])
-    if count < df_out.shape[0]: continue
+    last=df_filtered.loc[df_filtered['sentence']==df_out['sentence'].iloc[-1]].index[0]+1
+
+    if count < last: continue
     
     for l in j:
         print("***************************************************************************** \n")
