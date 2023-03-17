@@ -10,7 +10,7 @@ df_filtered['word_list'] = df_filtered['word_list'].apply(ast.literal_eval)
 def clear_console():
     sys.stdout.write("\033[2J\033[1;1H")
     sys.stdout.flush()
-for count,i,j,lab in zip(range(df_filtered.shape[0]),df_filtered.head(5)["sentence"],df_filtered.head(5)["word_list"],df_filtered.head(5)["label"]):
+for count,i,j,lab in zip(range(df_filtered.shape[0]),df_filtered["sentence"],df_filtered["word_list"],df_filtered["label"]):
     labels_subject=[]
     labels_polarized=[]
     try:
