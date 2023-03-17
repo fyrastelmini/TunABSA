@@ -40,5 +40,5 @@ for count,i,j,lab in zip(range(df_filtered.shape[0]),df_filtered.head(5)["senten
     
     line={'sentence': i, 'label': lab, 'subject_mask': labels_subject, 'polarized_mask': labels_polarized}
     df_out=df_out.append(line,ignore_index=True)
-    print(df_out)
+    #print(df_out)
     df_out.to_csv("dataset_out.csv",index=False)
