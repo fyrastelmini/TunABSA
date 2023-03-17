@@ -13,6 +13,7 @@ def clear_console():
 for count,i,j,lab in zip(range(df_filtered.shape[0]),df_filtered["sentence"],df_filtered["word_list"],df_filtered["label"]):
     labels_subject=[]
     labels_polarized=[]
+    breaker=False
     try:
         df_out=pd.read_csv("dataset_out.csv")
     except:
@@ -30,12 +31,17 @@ for count,i,j,lab in zip(range(df_filtered.shape[0]),df_filtered["sentence"],df_
         elif label=="2":
             labels_subject.append(0)
             labels_polarized.append(1)
+        elif label=="3":
+            labels_subject=[]
+            labels_polarized=[]
+            breaker=True
+            break
         else:
             labels_subject.append(0)
             labels_polarized.append(0)
         clear_console()
     #check if first element by trying to import, if import fails means first element
-    
+    if breaker==True: continue
     line={'sentence': i, 'label': lab, 'subject_mask': labels_subject, 'polarized_mask': labels_polarized}
     df_out=df_out.append(line,ignore_index=True)
     #print(df_out)
