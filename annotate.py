@@ -17,9 +17,7 @@ for count,i,j,lab in zip(range(df_filtered.shape[0]),df_filtered.head(5)["senten
         df_out=pd.read_csv("dataset_out.csv")
     except:
         df_out=pd.DataFrame(columns=['sentence', 'label', 'subject_mask','polarized_mask'])
-    if count < df_out.shape[0]: 
-        print(count, df_out.shape[0],df_filtered.shape[0])
-        continue
+    if count < df_out.shape[0]: continue
     
     for l in j:
         print("***************************************************************************** \n")
