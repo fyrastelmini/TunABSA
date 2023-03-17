@@ -1,6 +1,10 @@
 import pandas as pd
 import ast
 import sys
+import warnings
+
+warnings.filterwarnings("ignore")
+
 df_filtered=pd.read_csv("dataset.csv")
 df_filtered['word_list'] = df_filtered['word_list'].apply(ast.literal_eval)
 def clear_console():
@@ -18,8 +22,9 @@ for count,i,j,lab in zip(range(df_filtered.shape[0]),df_filtered.head(5)["senten
         continue
     
     for l in j:
+        print("***************************************************************************** \n")
         print(i,"\n")
-        print("is '",l,"' a subject (1) or a polarized word (2)")
+        print("Is '",l,"' a subject (1) or a polarized word (2)")
         label=input()
         if label=="1": 
             labels_subject.append(1)
