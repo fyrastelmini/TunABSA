@@ -1,21 +1,21 @@
 import pandas as pd
 import ast
-import sys
+import os
 import warnings
 
 warnings.filterwarnings("ignore")
 
-df_filtered=pd.read_csv("sample.csv")
+df_filtered=pd.read_csv("./sample.csv")
 df_filtered['word_list'] = df_filtered['word_list'].apply(ast.literal_eval)
 def clear_console():
-    sys.stdout.write("\033[2J\033[1;1H")
-    sys.stdout.flush()
+    """Clears the console."""
+    os.system('cls' if os.name == 'nt' else 'clear')
 clear_console()
 print("welcome to the annotation script\n")
 print("this script is made to annotate files structured like this one\n")
 print(df_filtered,"\n")
 print("the script will go through every word and ask you for an input according to its label\n")
-print("if a word doesnt correspond to any label, press [enter] directly, you can press 3 to skip the sentence and not save it in the outpit dataset\n")
+print("if a word doesnt correspond to any label, press [enter] directly, you can press 3 to skip the sentence and not save it in the output dataset\n")
 print("the output file will be named dataset_out.csv and will be updated after each sentence added\n")
 print("if a file named dataset_out.csv already exists, the annotation will continue from the last input dataset sentence that is not in it\n")
 print("press [enter]")
@@ -26,12 +26,13 @@ for count,i,j,lab in zip(range(df_filtered.shape[0]),df_filtered["sentence"],df_
     labels_subject=[]
     labels_polarized=[]
     breaker=False
-    try:
+    if os.path.isfile("dataset_out.csv"):
         df_out=pd.read_csv("dataset_out.csv")
         last=df_filtered.loc[df_filtered['sentence']==df_out['sentence'].iloc[-1]].index[0]+1
-    except:
+    else:
         df_out=pd.DataFrame(columns=['sentence', 'label', 'subject_mask','polarized_mask'])
-    last=df_filtered.loc[df_filtered['sentence']==df_out['sentence'].iloc[-1]].index[0]+1
+        last=0
+    
 
     if count < last: continue
     
@@ -40,7 +41,7 @@ for count,i,j,lab in zip(range(df_filtered.shape[0]),df_filtered["sentence"],df_
         print("*************************************",count,"/",df_filtered.shape[0],"************************************* \n")
         print(i,"\n")
         print("Is '",l,"' a subject (1) or a polarized word (2)")
-        label=input()
+        label=input("")
         if label=="1": 
             labels_subject.append(1)
             labels_polarized.append(0)
