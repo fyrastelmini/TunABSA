@@ -1,4 +1,4 @@
-from sklearn.metrics import precision_score, recall_score, roc_auc_score, f1_score
+from sklearn.metrics import accuracy_score, precision_score, recall_score, roc_auc_score, f1_score
 
 def evaluate(y_test, y_pred,model_name):
     print("Evaluating on test set:")

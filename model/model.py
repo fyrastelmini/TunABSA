@@ -29,8 +29,8 @@ class BiGRU_pretrain:
         polarized_output = Dense(1, activation='sigmoid', name='polarized_output',kernel_initializer=initializer)(polarized_output)
         self.model = Model(inputs=input, outputs=[subject_output, polarized_output])
     
-    def compile_model(self):
-        adam = Adam(learning_rate=0.001)
+    def compile_model(self,lr=0.001):
+        adam = Adam(learning_rate=lr)
         jaccard_similarity = metrics.BinaryAccuracy(threshold=0.5)
         self.model.compile(loss="binary_crossentropy", optimizer=adam, metrics=[jaccard_similarity])
     

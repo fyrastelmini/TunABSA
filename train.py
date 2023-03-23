@@ -5,6 +5,7 @@ import yaml
 from transformers import BertTokenizer
 from utils.dataloader import load_dataset, make_train_test_data, preprocess
 from utils.evaluate import *
+from utils.load_pretrain import *
 from model.model import BiGRU_pretrain, BiGRU_attention
 
 
@@ -13,7 +14,11 @@ parser = argparse.ArgumentParser()
 parser.add_argument('--config_file', type=str, required=True, help='Path to the config file')
 parser.add_argument('--dataset_path', type=str, required=True, help='Path to the dataset')
 parser.add_argument('--tokenizer_checkpoint', type=str, required=True, help='URL or path to the tokenizer checkpoint')
+parser.add_argument('--pretrain_checkpoint',default=None, type=str, required=False, help='GRU Pretraining checkpoint')
+parser.add_argument('--freezing',default=False, type=bool, required=False, help='Freezing')
 args = parser.parse_args()
+
+
 
 # load configurations from the config file
 with open(args.config_file, 'r') as f:
@@ -38,12 +43,14 @@ if config['model_name'] == 'BiGRU_pretrain':
 elif config['model_name'] == 'BiGRU_attention':
     model = BiGRU_attention(vocab_size=len(tokenizer.get_vocab()), embedding_dim=config['embedding_dim'], gru_units=config['gru_units'])
     model.build_model()
+    if args.pretrain_checkpoint!=None:
+        model=load_pretrain(model,args.pretrain_checkpoint,args.freezing)
     model.compile_model(lr=config['learning_rate'])
     # preprocess dataset
     X_train, X_test, y_train, y_test=make_train_test_data(dataset,config['model_name'])
 # train the model
 if config['model_name'] == 'BiGRU_pretrain':
-    model.train_model(X_train, y_train, batch_size=config['batch_size'], epochs=config['epochs'], validation_split=config['validation_split'])
+    model.train_model(X_train, [y_train_subject,y_train_polarized], batch_size=config['batch_size'], epochs=config['epochs'], validation_split=config['validation_split'])
 elif config['model_name'] == 'BiGRU_attention':
     model.train_model(X_train,y_train, batch_size=config['batch_size'], epochs=config['epochs'], validation_split=config['validation_split'])
 

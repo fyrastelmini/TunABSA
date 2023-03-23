@@ -2,6 +2,7 @@
 def make_train_test_data(dataset,model_name):
     from sklearn.model_selection import train_test_split
     if model_name=='BiGRU_pretrain':
+        import numpy as np
         max_len = max([len(lst) for lst in dataset['tokens']])
 
         X_train_padded = [lst + [0] * (max_len - len(lst)) for lst in dataset['tokens']]
@@ -29,7 +30,7 @@ def make_train_test_data(dataset,model_name):
         X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42, shuffle=True,stratify=y)
         return(X_train, X_test, y_train, y_test)
 
-def preprocess(dataset,model_name,tokenizer,verbose,tokens_to_remove=[]):
+def preprocess(dataset,model_name,tokenizer,verbose,tokens_to_remove):
     if verbose==True:
         from tqdm import tqdm
         pbar=tqdm(total=dataset.shape[0]+2)
@@ -38,7 +39,7 @@ def preprocess(dataset,model_name,tokenizer,verbose,tokens_to_remove=[]):
         dataset['subject_mask'] = dataset['subject_mask'].apply(ast.literal_eval)
         dataset['polarized_mask'] = dataset['polarized_mask'].apply(ast.literal_eval)
     
-        def get_features(sentence, entity_list, polarity_list,tokenizer,tokens_to_remove,verbose):
+        def get_features(sentence, entity_list, polarity_list,tokenizer=tokenizer,tokens_to_remove=tokens_to_remove,verbose=verbose):
             new_indexer1=[] # to store polarity tokens
             new_indexer2=[] # to store entity tokens
             words=sentence.split(" ")
