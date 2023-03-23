@@ -47,7 +47,7 @@ pip install -r requirements.txt
 # Token-level features annotation
 * Run the following command-line and follow the instructions:
 ```
-python annotation/annotate.py"
+python annotation/annotate.py
 ```
 
 # Training the models
