@@ -57,17 +57,17 @@ python annotation/annotate.py
 ```
 python train.py --config_file "model/BiGRU_pretrain.yml" --dataset_path "dataset/dataset_out.csv" --tokenizer_checkpoint "ziedsb19/tunbert_zied"
 ```
-## Pre-training the biGRU+attention model on the 60k sentences dataset
+## Training the biGRU+attention model on the 60k sentences dataset
 * Run the following command-line:
 ```
 python train.py --config_file "model/BiGRU_attention.yml" --dataset_path "dataset/TUNIZI_V2_FILTERED_CALIBRATED.csv" --tokenizer_checkpoint "ziedsb19/tunbert_zied"
 ```
-## Pre-training the biGRU+attention model on the 60k sentences dataset with a pre-trained embedding+Bi-GRU checkpoint
+## Training the biGRU+attention model on the 60k sentences dataset with a pre-trained embedding+Bi-GRU checkpoint
 * Run the following command-line:
 ```
 python train.py --config_file "model/BiGRU_attention.yml" --dataset_path "dataset/TUNIZI_V2_FILTERED_CALIBRATED.csv" --tokenizer_checkpoint "ziedsb19/tunbert_zied" --pretrain_checkpoint="checkpoints/BiGRU_pretrain.h5"
 ```
-## Pre-training the biGRU+attention model on the 60k sentences dataset with a pre-trained embedding+Bi-GRU checkpoint and freezing on the pre-trained layers
+## Training the biGRU+attention model on the 60k sentences dataset with a pre-trained embedding+Bi-GRU checkpoint and freezing on the pre-trained layers
 * Run the following command-line:
 ```
 python train.py --config_file "model/BiGRU_attention.yml" --dataset_path "dataset/TUNIZI_V2_FILTERED_CALIBRATED.csv" --tokenizer_checkpoint "ziedsb19/tunbert_zied" --pretrain_checkpoint="checkpoints/BiGRU_pretrain.h5" --freezing=True
