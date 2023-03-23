@@ -1,5 +1,4 @@
 model_name: BiGRU_attention
-vocab_size: 10000
 embedding_dim: 32
 gru_units: 16
 dropout_rate: 0.2

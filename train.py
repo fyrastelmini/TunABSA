@@ -4,6 +4,7 @@ import yaml
 
 from transformers import BertTokenizer
 from utils.dataloader import load_dataset, make_train_test_data, preprocess
+import utils.evaluate
 from model.model import BiGRU_pretrain, BiGRU_attention
 
 
