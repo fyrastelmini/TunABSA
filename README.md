@@ -42,15 +42,16 @@ conda activate TunABSA
 
 # Install requirements
 pip install -r requirements.txt
+
 ```
-
-# Training the models
-
-# Training the models
+# Token-level features annotation
 * Run the following command-line and follow the instructions:
 ```
 python annotation/annotate.py"
 ```
+
+# Training the models
+
 ## Pre-training the embedding+biGRU model on the 1k sentences dataset
 * Run the following command-line:
 ```
