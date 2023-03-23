@@ -36,6 +36,7 @@ class BiGRU_pretrain:
     
     def train_model(self, X_train, Y, batch_size=32, epochs=10, validation_split=0.2):
         early_stopping = EarlyStopping(monitor='loss',patience=3,restore_best_weights=True)
+        print("Training model:")
         self.model.fit(X_train, Y, batch_size=batch_size, epochs=epochs, validation_split=validation_split,callbacks=[early_stopping])
     
     def predict(self, X):
@@ -67,6 +68,7 @@ class BiGRU_attention:
     
     def train_model(self, X_train, Y, batch_size=32, epochs=10, validation_split=0.2):
         early_stopping = EarlyStopping(monitor='val_accuracy',patience=5,restore_best_weights=True)
+        print("Training model:")
         self.model.fit(X_train, Y, batch_size=batch_size, epochs=epochs, validation_split=validation_split,callbacks=[early_stopping])
     
     def predict(self, X):

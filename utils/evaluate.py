@@ -1,6 +1,7 @@
 from sklearn.metrics import precision_score, recall_score, roc_auc_score, f1_score
 
 def evaluate(y_test, y_pred,model_name):
+    print("Evaluating on test set:")
     if model_name == 'BiGRU_pretrain':
         y_test_subject=y_test[0]
         y_pred_subject=y_pred[0]
@@ -17,8 +18,6 @@ def evaluate(y_test, y_pred,model_name):
         # print the evaluation results
         print(f"Subject accuracy: {subject_acc:.4f}, Subject F1: {subject_f1:.4f}")
         print(f"Polarized accuracy: {polarized_acc:.4f}, Polarized F1: {polarized_f1:.4f}")
-
-
     elif model_name == 'BiGRU_attention':
         precision = precision_score(y_test, y_pred)
         recall = recall_score(y_test, y_pred)
