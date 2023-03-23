@@ -1,10 +1,10 @@
 import os
 import argparse
 import yaml
-import tensorflow as tf
-from transformers import AutoTokenizer
+
+from transformers import BertTokenizer
 from utils.dataloader import load_dataset, preprocess
-from models.models import BiGRU_pretrain, BiGRU_attention
+from model.model import BiGRU_pretrain, BiGRU_attention
 
 
 # parse command line arguments
@@ -22,7 +22,7 @@ with open(args.config_file, 'r') as f:
 dataset = load_dataset(args.dataset_path)
 
 # load the tokenizer
-tokenizer = AutoTokenizer.from_pretrained(args.tokenizer_checkpoint)
+tokenizer = BertTokenizer.from_pretrained(args.tokenizer_checkpoint)
 
 # preprocess the dataset
 preprocessed_data = [] # replace with your preprocessing code
