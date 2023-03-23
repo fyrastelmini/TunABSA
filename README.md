@@ -10,7 +10,9 @@ README.md             # This file :)
 requirements.txt      # pip requirements file
 train.py              # model training script
 ...
-
+annotation/           # annotation script folder
+    annotate.py       # annotation script
+    sample.csv        # sample dataset for token-level features annotation sript
 dataset/             # datasets used for training
     TUNIZI_V2_FILTERED_CALIBRATED.csv     # TUNIZI_V2 dataset sample (sentencess with 10 or less words, calibrated 0/1 labels)
     dataset_out.csv                # our experimental TUNIZI dataset with token-level features
@@ -41,8 +43,14 @@ conda activate TunABSA
 # Install requirements
 pip install -r requirements.txt
 ```
+
 # Training the models
 
+# Training the models
+* Run the following command-line and follow the instructions:
+```
+python annotation/annotate.py"
+```
 ## Pre-training the embedding+biGRU model on the 1k sentences dataset
 * Run the following command-line:
 ```
