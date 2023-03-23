@@ -1,0 +1,16 @@
+model_name: BiGRU_pretrain
+vocab_size: 10000
+embedding_dim: 32
+gru_units: 16
+dropout_rate: 0.2
+subject_output_size: 12
+polarized_output_size: 12
+subject_output_activation: sigmoid
+polarized_output_activation: sigmoid
+final_activation: sigmoid
+learning_rate: 0.001
+loss: binary_crossentropy
+metrics: [binary_accuracy]
+batch_size: 32
+epochs: 10
+validation_split: 0.2
