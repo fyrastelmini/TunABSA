@@ -25,7 +25,7 @@ tokenizer = BertTokenizer.from_pretrained(args.tokenizer_checkpoint)
 # you can define the tokens to remove
 tokens_to_remove = [2,3]
 # load the dataset
-dataset = load_dataset(args.dataset_path,config['model_name'],tokenizer,verbose=True,tokens_to_remove)
+dataset = load_dataset(args.dataset_path,config['model_name'],tokenizer,True,tokens_to_remove)
 
 
 # create and compile the model and prepare the data
@@ -42,7 +42,7 @@ elif config['model_name'] == 'BiGRU_attention':
     # preprocess dataset
     X_train, X_test, y_train, y_test=make_train_test_data(dataset,config['model_name'])
 # train the model
-if config['model_name'] == 'BiGRU_pretrain'::
+if config['model_name'] == 'BiGRU_pretrain':
     model.train_model(X_train, y_train, batch_size=config['batch_size'], epochs=config['epochs'], validation_split=config['validation_split'])
 elif config['model_name'] == 'BiGRU_attention':
     model.train_model(X_train, y_train_subject,y_train_polarized, batch_size=config['batch_size'], epochs=config['epochs'], validation_split=config['validation_split'])
