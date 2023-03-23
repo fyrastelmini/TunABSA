@@ -37,7 +37,7 @@ if config['model_name'] == 'BiGRU_pretrain':
     X_train, X_test, y_train_subject, y_test_subject, y_train_polarized, y_test_polarized=make_train_test_data(dataset,config['model_name'])
 elif config['model_name'] == 'BiGRU_attention':
     model = BiGRU_attention(vocab_size=len(tokenizer.get_vocab()), embedding_dim=config['embedding_dim'], gru_units=config['gru_units'])
-    model.build_model(attention_units=config['attention_units'])
+    model.build_model()
     model.compile_model(lr=config['learning_rate'])
     # preprocess dataset
     X_train, X_test, y_train, y_test=make_train_test_data(dataset,config['model_name'])
@@ -45,7 +45,7 @@ elif config['model_name'] == 'BiGRU_attention':
 if config['model_name'] == 'BiGRU_pretrain':
     model.train_model(X_train, y_train, batch_size=config['batch_size'], epochs=config['epochs'], validation_split=config['validation_split'])
 elif config['model_name'] == 'BiGRU_attention':
-    model.train_model(X_train, y_train_subject,y_train_polarized, batch_size=config['batch_size'], epochs=config['epochs'], validation_split=config['validation_split'])
+    model.train_model(X_train,y_train, batch_size=config['batch_size'], epochs=config['epochs'], validation_split=config['validation_split'])
 
 # test model
 if config['model_name'] == 'BiGRU_pretrain':

@@ -2,7 +2,6 @@ model_name: BiGRU_attention
 embedding_dim: 32
 gru_units: 16
 dropout_rate: 0.2
-attention_units: 32
 output_size: 1
 output_activation: sigmoid
 learning_rate: 0.0001

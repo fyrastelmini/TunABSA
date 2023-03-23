@@ -1,5 +1,6 @@
 
 def make_train_test_data(dataset,model_name):
+    from sklearn.model_selection import train_test_split
     if model_name=='BiGRU_pretrain':
         max_len = max([len(lst) for lst in dataset['tokens']])
 
@@ -19,6 +20,7 @@ def make_train_test_data(dataset,model_name):
         return(X_train, X_test, y_train_subject, y_test_subject, y_train_polarized, y_test_polarized)
     
     elif model_name=='BiGRU_attention':
+        from tensorflow.keras.preprocessing.sequence import pad_sequences
         max_sequence_length = dataset['tokens'].apply(len).max()
         X = dataset['tokens']
         X = pad_sequences(X, maxlen=max_sequence_length, padding='post', truncating='post')
@@ -67,19 +69,19 @@ def preprocess(dataset,model_name,tokenizer,verbose,tokens_to_remove=[]):
         dataset = dataset.drop(['subject_mask', 'polarized_mask'], axis=1)
         return(dataset)
     elif model_name=='BiGRU_attention':
-        def get_features(sentence,tokenizer,tokens_to_remove, verbose=True): 
+        def get_features(sentence,tokenizer=tokenizer,tokens_to_remove=tokens_to_remove, verbose=True): 
             tokens = tokenizer(sentence)["input_ids"]
             for token in tokens_to_remove:
                 tokens.remove(token)
             if verbose==True: pbar.update(1)
             return(tokens)
-        dataset['tokens'] = dataset['sentence'].apply(get_features_verbose)
+        dataset['tokens'] = dataset['sentence'].apply(get_features)
         dataset=dataset[["tokens","label"]]
         return(dataset)
 
-def load_dataset(dataset_path,model_name,tokenizer,tokens_to_remove=[],verbose==True):
+def load_dataset(dataset_path,model_name,tokenizer,verbose=True,tokens_to_remove=[]):
     import pandas as pd
     dataset = pd.read_csv(dataset_path)
     if verbose==True: print("Preprocessing dataset:")
-    dataset=preprocess(dataset, model_name, tokenizer, verbose,tokens_to_remove,verbose)
+    dataset=preprocess(dataset, model_name, tokenizer, verbose,tokens_to_remove)
     return(dataset)
