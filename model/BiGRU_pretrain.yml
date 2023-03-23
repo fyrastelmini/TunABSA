@@ -10,6 +10,6 @@ final_activation: sigmoid
 learning_rate: 0.001
 loss: binary_crossentropy
 metrics: [binary_accuracy]
-batch_size: 32
-epochs: 1
+batch_size: 128
+epochs: 50
 validation_split: 0.2
