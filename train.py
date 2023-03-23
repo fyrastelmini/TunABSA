@@ -38,6 +38,7 @@ if config['model_name'] == 'BiGRU_pretrain':
     model = BiGRU_pretrain(vocab_size=len(tokenizer.get_vocab()), embedding_dim=config['embedding_dim'], gru_units=config['gru_units'])
     model.build_model()
     model.compile_model(lr=config['learning_rate'])
+    model.model.summary()
     # preprocess dataset
     X_train, X_test, y_train_subject, y_test_subject, y_train_polarized, y_test_polarized=make_train_test_data(dataset,config['model_name'])
 elif config['model_name'] == 'BiGRU_attention':
@@ -46,6 +47,7 @@ elif config['model_name'] == 'BiGRU_attention':
     if args.pretrain_checkpoint!=None:
         model=load_pretrain(model,args.pretrain_checkpoint,args.freezing)
     model.compile_model(lr=config['learning_rate'])
+    model.model.summary()
     # preprocess dataset
     X_train, X_test, y_train, y_test=make_train_test_data(dataset,config['model_name'])
 # train the model
