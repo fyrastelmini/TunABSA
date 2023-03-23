@@ -4,7 +4,7 @@ import yaml
 
 from transformers import BertTokenizer
 from utils.dataloader import load_dataset, make_train_test_data, preprocess
-import utils.evaluate
+import utils.evaluate as evaluate
 from model.model import BiGRU_pretrain, BiGRU_attention
 
 
@@ -57,7 +57,7 @@ if config['model_name'] == 'BiGRU_pretrain':
 elif config['model_name'] == 'BiGRU_attention':
     y_pred = model.predict(X_test)
     y_pred = (y_pred[:,0,0]> 0.5).astype(int)
-evaluate(y_test, y_pred,model_name)
+evaluate(y_test, y_pred,config['model_name'])
 # save the model weights
 if not os.path.exists('checkpoints'):
     os.makedirs('checkpoints')
